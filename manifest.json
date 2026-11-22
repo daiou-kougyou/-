@@ -1,0 +1,22 @@
+{
+  "name": "大桜",
+  "short_name": "大桜-鉄筋工",
+  "start_url": "/vip/",
+  "scope": "/vip/",
+  "lang": "ja",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>鉄筋積算書｜大桜工業株式会社</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ffffff">
 <meta name="generator" content="Studio.Design">
 <meta name="robots" content="all">
 <meta property="og:site_name" content="大桜工業株式会社">
@@ -36,6 +38,7 @@ body {
   padding: 0;
   width: 100%;
   background: white;
+  padding-bottom: 280px;
 }
 .a4-container {
   width: 210mm;
@@ -58,7 +61,7 @@ table input[type="text"] {
   font-size: 16px;
 }
 th, td {
-  border: 0.1pt solid #999;
+  border: 1px solid #999;
   padding: 4px;
   border-style: inset;
   text-align: center;
@@ -202,24 +205,28 @@ td canvas {
 .header {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-  padding: 20px;
+  gap: 10px;
+  padding-bottom: 20px;
+  padding-left: 20px;
   font-size: 14px;
   font-family: Arial, sans-serif;
 }
 .header-body {
-  flex: 6;
+	flex: 1 1 60%;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 .header-left {
   flex: 1;
 }
 .header-right {
+flex: 1 1 35%;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px; 
+  text-align: left;
+  padding-left: 20px;
 }
 .header-body .info-item {
   display: flex;
@@ -248,38 +255,51 @@ td canvas {
   font-weight: normal;
 }
 .header-top {
+  margin-top: 0px;
   text-align: center;
 }
-.header-top h1 {
-  font-size: 25px;
-  color: #000;
-  letter-spacing: 25px;
+.header-top .title {
+
+  margin-right: 50px;
+  font-size: 30px;
+  text-align: center;
+  letter-spacing: 28px; /* dãn chữ */
+  font-weight: normal;
 }
+
 .fixed-buttons {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 45px;
   display: flex;
-  gap: 10px;
+  gap: 2px;
   z-index: 999;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  left: 50%;                
+  transform: translateX(-50%);  
 }
 .fixed-buttons .btn {
-  padding: 10px 16px;
-  font-size: 14px;
-  border: none;
+  padding: 10px 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;     /* Viền nhẹ màu xám */
   border-radius: 6px;
-  background-color: #cccccc;
-  color: #333;
+  background-color: #f5f5f5;   /* Màu nền nhạt */
+  color: #555;                 /* Màu chữ nhạt */
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Bóng nhẹ */
 }
+
 .fixed-buttons .btn:hover {
-  background-color: #eeeeee;
+  background-color: #fafafa;   /* Sáng hơn khi hover */
+  border-color: #bbb;          /* Viền hover đậm hơn một chút */
 }
+
   .tabs {
     display: flex;
     margin-bottom: 0.5rem;
     border-bottom: 1px solid #ddd;
+	white-space: nowrap; 
   }
   .tab-btn {
     display: flex;
@@ -288,7 +308,7 @@ td canvas {
     cursor: pointer;
     border: none;
     background: none;
-	font-size: 14px;
+	font-size: 13px;
     border-bottom: 3px solid transparent;
   }
   .tab-btn.active {
@@ -531,6 +551,7 @@ select.angle-preset {
   text-decoration: underline;
   text-decoration-color: red;
 }
+
 /* Chrome, Safari, Edge, Opera */
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {
@@ -553,15 +574,15 @@ input[type=number] {
   color: #666;        
 }
 
-
-
+body.popup-open {
+  overflow-x: hidden;
+  position: fixed; 
+  width: 100vw; 
+}
 /* Responsive Adjustments */
-@media (max-width: 1024px) {
-  .header {
-    padding: 15px;
-  }
-  .header-body, .header-right {
-    flex: 1;
+@media (max-width: 768px) {
+  html, body {
+    max-width: 100vw;
   }
   th, td {
     font-size: 12px;
@@ -575,24 +596,31 @@ input[type=number] {
     max-width: none;
     font-size: 14px;
    }
-input[type="number"],
-input[type="text"] {
+	input[type="number"],
+	input[type="text"] {
     font-size: 16px;
+    width: 100%;
   #shapePopup {
+    top: 0;
+    left: 0;
+    transform: none;
     width: 100vw;
     height: 100vh;
+    border-radius: 0;
     padding: 1rem;
-    border-radius: 0; 
+    overflow-y: auto;
   }
 
   .tab-layout {
-    align-items: center;
-    gap: 1.5rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    width: 100%;
   }
 
   .tab-col {
     width: 100%;
-    max-width: 320px;
+    max-width: 100%;
   }
 
   .tab-col.shape-col {
@@ -607,7 +635,7 @@ input[type="text"] {
   }
 }
   .info-date input[type="date"] {
-    width: 100px;
+    width: 120px;
   }
 
 
@@ -622,12 +650,229 @@ input[type="text"] {
     pointer-events: none;
   }
 }
+
+#footer {
+  background-color: white; 
+  color: black;           
+  position: fixed;
+  bottom: 0;
+  left: 50%;                    
+  transform: translateX(-50%);     
+  width: 100vw;
+  box-sizing: border-box;
+  padding: 10px 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid #ccc;
+}
+.footer-logo {
+  width: 140px;
+  height: auto;
+  margin: 0 auto 0px auto;
+  display: block;
+}
+
+
+
+
+
+
+
+
+#toolPopup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  border: 1px solid #aaa;
+  padding: 16px;
+  z-index: 1001;
+  border-radius: 10px;
+  width: 375px;
+  max-width: 100vw; 
+  max-height: 100vh;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  overflow-y: auto;
+}
+
+@media (max-width: 767px) {
+  #toolPopup {
+    width: 90%;
+  }
+}
+
+
+.tool-section:not(.active) > .tool-header {
+  display: none;
+}
+
+body.no-active .tool-header {
+  display: block !important;
+}
+
+.tool-section {
+  margin-top: 15px;
+}
+
+.tool-header {
+  padding: 10px;
+  background: #f9f9f9;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  white-space: nowrap;
+}
+
+.tool-body {
+  padding: 10px;
+  display: none;
+  background: #fff;
+}
+
+.tool-section.active .tool-body {
+  display: block;
+}
+#toolPopup .popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 4px;
+}
+
+#toolPopup .popup-header h2 {
+  margin: 0;
+  font-size: 18px;
+}
+#toolPopup .close-btn {
+  background: transparent;
+  border: 1px solid #666;  
+  border-radius: 6px;     
+  font-weight: normal;
+  font-size: 16px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px 12px;
+  color: #666;
+  user-select: none;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+#toolPopup .close-btn:hover {
+  color: #f00;
+  border-color: #f00;     
+}
+
+.form-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+.form-header {
+  display: block;
+  width: 100%;  
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #000;
+  padding-bottom: 2px;
+}
+.input-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+  gap: 20px;
+  flex-wrap: nowrap;
+  font-size: 16px;
+  align-items: flex-end;
+}
+.result-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: nowrap;
+  font-size: 16px;
+  align-items: flex-end;
+}
+
+
+.input-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70px;
+}
+.input-col.wide-col {
+  min-width: 158px;
+}
+
+.input-col span {
+  margin-bottom: 4px;
+  text-align: center;
+  user-select: none;
+}
+
+.input-col input {
+  width: 100%;
+  padding: 6px 4px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.math-symbol {
+  font-size: 24px;
+  user-select: none;
+  line-height: 1;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10px;
+  margin: 0 4px;
+}
+
+.canvas-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  width: 158px;
+  height: 65px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+.canvas-col.wide-col {
+  min-width: 250px;
+  min-height: 150px;
+}
+input[readonly] {
+  background-color: #f9f9f9;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 4px; 
+  padding: 4px 8px;
+}
+
+
+
+
+
+
 </style>
 </head>
 <body>
 <div class="a4-container">
 <div class="header-top">
-  <h1>鉄筋積算書</h1>
+    <div class="title">鉄筋積算書</div>
   <div class="header">
     <div class="header-body">
       <div class="info-item">
@@ -637,25 +882,26 @@ input[type="text"] {
         現場住所：<input type="text" id="site-address" placeholder="福岡県那珂川西畑1054番地1" />
       </div>
       <div class="info-item">
-        担当者(電話)：<input type="text" id="contact" placeholder="富安栄嗣 (090 3660 1790)" />
+        担当者(電話)：<input type="text" id="contact" placeholder="山田 太郎 (080 1234 5678)" />
       </div>
       <div class="info-date">
-        搬入日<input type="date" id="delivery-date" />
-        <label style="margin-left: 1rem;" id="transport-label">運搬:</label>
+        <label id="transport-label">運搬:</label>
         <select id="transport-select">
-          <option value="">不要</option>
-          <option value="5000">軽トラック (5,000)</option>
-          <option value="15000">3トン車 (15,000)</option>
-          <option value="20000">4トン車 (20,000)</option>
-          <option value="0">無料</option>
+          <option value="">お引取り</option>
+          <option value="5000">軽トラック(5,000)</option>
+          <option value="15000">3トン車(15,000)</option>
+          <option value="20000">4トン車(20,000)</option>
+		  
         </select>
+		
+        <label id="date-label">搬入日:</label>
+        <input type="date" id="delivery-date" />
       </div>
     </div>
     <div class="header-right">
       <div class="info-item">大桜工業株式会社</div>
       <div class="info-item">福岡県那珂川西畑1054番地1</div>
       <div class="info-item">Tel: 092-951-0727 || Fax: 092-951-0728</div>
-      <div class="info-item">LINE: 090-3660-1790 (富安栄嗣)</div>
       <div class="info-item">Email: momo.cheri@w2.dion.ne.jp</div>
     </div>
   </div>
@@ -669,9 +915,9 @@ input[type="text"] {
           <th>切寸法</th>
           <th>本数</th>
           <th>重量<br><span class="sub">(kg)</span></th>
-          <th>切断<br><span class="sub">25円/回</span></th>
-          <th>折曲<br><span class="sub">25円/回</span></th>
-          <th>材料<br><span class="sub">110円/kg</span></th>
+          <th>切断<br><span class="sub">30円/回</span></th>
+          <th>折曲<br><span class="sub">30円/回</span></th>
+          <th>材料<br><span class="sub">115円/kg</span></th>
           <th>合計<br><span class="sub">材料+切断＋折曲</span></th>
       </tr>
     </thead>
@@ -719,11 +965,11 @@ input[type="text"] {
   <h3>形状選択</h3>
   <div class="tabs">
     <button class="tab-btn active" data-tab="0" data-shape="0">直筋</button>
-    <button class="tab-btn" data-tab="1" data-shape="1">1 回</button>
-    <button class="tab-btn" data-tab="2" data-shape="2">2 回</button>
-    <button class="tab-btn" data-tab="3" data-shape="3">3 回</button>
-    <button class="tab-btn" data-tab="4" data-shape="4">4 回</button>
-    <button class="tab-btn" data-tab="5" data-shape="5">5 回</button>
+    <button class="tab-btn" data-tab="1" data-shape="1">1回曲</button>
+    <button class="tab-btn" data-tab="2" data-shape="2">2回曲</button>
+    <button class="tab-btn" data-tab="3" data-shape="3">3回曲</button>
+    <button class="tab-btn" data-tab="4" data-shape="4">4回曲</button>
+    <button class="tab-btn" data-tab="5" data-shape="5">5回曲</button>
   </div>
   <div class="spec-row">
     <label>径 <input type="number" id="dia" value="" /></label>
@@ -773,9 +1019,9 @@ input[type="text"] {
   <div class="tab-layout">
     <div class="tab-col dim-col">
       <label class="tab-col-header">寸法</label>
-      <label><span>a</span><input type="number" id="s2a" value="a" /></label>
-      <label><span class="highlight-label">b</span><input type="number" id="s2b" value="b" /></label>
-      <label><span>c</span><input type="number" id="s2c" value="c" /></label>
+      <label data-param="a"><span>a</span><input type="number" id="s2a" value="a" /></label>
+      <label data-param="b"><span class="highlight-label">b</span><input type="number" id="s2b" value="b" /></label>
+      <label data-param="c"><span>c</span><input type="number" id="s2c" value="c" /></label>
     </div>
     <div class="tab-col angle-col">
       <label class="tab-col-header">角度</label>
@@ -804,10 +1050,10 @@ input[type="text"] {
   <div class="tab-layout">
     <div class="tab-col dim-col">
       <label class="tab-col-header">寸法</label>
-      <label><span>a</span><input type="number" id="s3a" value="a" /></label>
-      <label><span class="highlight-label">b</span><input type="number" id="s3b" value="b" /></label>
-      <label><span>c</span><input type="number" id="s3c" value="c" /></label>
-      <label><span>d</span><input type="number" id="s3d" value="d" /></label>
+      <label data-param="a"><span class="highlight-label">a</span><input type="number" id="s3a" value="a" /></label>
+      <label data-param="b"><span class="highlight-label">b</span><input type="number" id="s3b" value="b" /></label>
+      <label data-param="c"><span class="highlight-label">c</span><input type="number" id="s3c" value="c" /></label>
+      <label data-param="d"><span class="highlight-label">d</span><input type="number" id="s3d" value="d" /></label>
     </div>
     <div class="tab-col angle-col">
       <label class="tab-col-header">角度</label>
@@ -818,17 +1064,17 @@ input[type="text"] {
       </label>
       <label><span>1</span>
         <div class="input-wrap">
-          <input type="number" id="s3bend1" value="90" /><span class="suffix">°</span>
+          <input type="number" id="s3bend1" value="135" /><span class="suffix">°</span>
         </div>
       </label>
       <label><span>2</span>
         <div class="input-wrap">
-          <input type="number" id="s3bend2" value="90" /><span class="suffix">°</span>
+          <input type="number" id="s3bend2" value="-135" /><span class="suffix">°</span>
         </div>
       </label>
       <label><span>3</span>
         <div class="input-wrap">
-          <input type="number" id="s3bend3" value="90" /><span class="suffix">°</span>
+          <input type="number" id="s3bend3" value="135" /><span class="suffix">°</span>
         </div>
       </label>
     </div>
@@ -841,11 +1087,11 @@ input[type="text"] {
   <div class="tab-layout">
     <div class="tab-col dim-col">
       <label class="tab-col-header">寸法</label>
-      <label><span>a</span><input type="number" id="s4a" value="a" /></label>
-      <label><span>b</span><input type="number" id="s4b" value="b" /></label>
-      <label><span>c</span><input type="number" id="s4c" value="c" /></label>
-      <label><span>d</span><input type="number" id="s4d" value="d" /></label>
-      <label><span>e</span><input type="number" id="s4e" value="e" /></label>
+      <label data-param="a"><span>a</span><input type="number" id="s4a" value="a" /></label>
+      <label data-param="b"><span>b</span><input type="number" id="s4b" value="b" /></label>
+      <label data-param="c"><span class="highlight-label">c</span><input type="number" id="s4c" value="c" /></label>
+      <label data-param="d"><span class="highlight-label">d</span><input type="number" id="s4d" value="d" /></label>
+      <label data-param="e"><span>e</span><input type="number" id="s4e" value="e" /></label>
     </div>
     <div class="tab-col angle-col">
       <label class="tab-col-header">角度</label>
@@ -856,22 +1102,22 @@ input[type="text"] {
       </label>
       <label><span>1</span>
         <div class="input-wrap">
-          <input type="number" id="s4bend1" value="-45" /><span class="suffix">°</span>
+          <input type="number" id="s4bend1" value="180" /><span class="suffix">°</span>
         </div>
       </label>
       <label><span>2</span>
         <div class="input-wrap">
-          <input type="number" id="s4bend2" value="-90" /><span class="suffix">°</span>
+          <input type="number" id="s4bend2" value="90" /><span class="suffix">°</span>
         </div>
       </label>
       <label><span>3</span>
         <div class="input-wrap">
-          <input type="number" id="s4bend3" value="-90" /><span class="suffix">°</span>
+          <input type="number" id="s4bend3" value="90" /><span class="suffix">°</span>
         </div>
       </label>
       <label><span>4</span>
         <div class="input-wrap">
-          <input type="number" id="s4bend4" value="-135" /><span class="suffix">°</span>
+          <input type="number" id="s4bend4" value="180" /><span class="suffix">°</span>
         </div>
       </label>
     </div>
@@ -884,12 +1130,12 @@ input[type="text"] {
   <div class="tab-layout">
     <div class="tab-col dim-col">
       <label class="tab-col-header">寸法</label>
-      <label><span>a</span><input type="number" id="s5a" value="a" /></label>
-      <label><span>b</span><input type="number" id="s5b" value="b" /></label>
-      <label><span>c</span><input type="number" id="s5c" value="c" /></label>
-      <label><span>d</span><input type="number" id="s5d" value="d" /></label>
-      <label><span>e</span><input type="number" id="s5e" value="e" /></label>
-      <label><span>f</span><input type="number" id="s5f" value="f" /></label>
+      <label data-param="a"><span>a</span><input type="number" id="s5a" value="a" /></label>
+      <label data-param="b"><span>b</span><input type="number" id="s5b" value="b" /></label>
+      <label data-param="c"><span class="highlight-label">c</span><input type="number" id="s5c" value="c" /></label>
+      <label data-param="d"><span class="highlight-label">d</span><input type="number" id="s5d" value="d" /></label>
+      <label data-param="e"><span>e</span><input type="number" id="s5e" value="e" /></label>
+      <label data-param="f"><span>f</span><input type="number" id="s5f" value="f" /></label>
     </div>
     <div class="tab-col angle-col">
       <label class="tab-col-header">角度</label>
@@ -900,7 +1146,7 @@ input[type="text"] {
       </label>
       <label><span>1</span>
         <div class="input-wrap">
-          <input type="number" id="s5bend1" value="45" /><span class="suffix">°</span>
+          <input type="number" id="s5bend1" value="135" /><span class="suffix">°</span>
         </div>
       </label>
       <label><span>2</span>
@@ -920,7 +1166,7 @@ input[type="text"] {
       </label>
       <label><span>5</span>
         <div class="input-wrap">
-          <input type="number" id="s5bend5" value="45" /><span class="suffix">°</span>
+          <input type="number" id="s5bend5" value="135" /><span class="suffix">°</span>
         </div>
       </label>
     </div>
@@ -943,42 +1189,509 @@ input[type="text"] {
     </button>
   </div>
 </div>
+
+
+
+
+
+
+<div id="toolPopup" class="popup">
+  <div class="popup-content">
+    <div class="popup-header">
+      <h2>計算フォーム</h2>
+      <button class="close-btn" onclick="closeToolPopup()">閉じる</button>
+    </div>
+
+<div class="tool-section">
+  <div class="tool-header">① 使用材・継手・追出指定 → 回数・追出算出</div>
+  <div class="tool-body">
+    <div class="form-layout">
+      <!-- Nhập liệu -->
+      <div class="form-column">
+        <label class="form-header">入力項目</label>
+        <div class="input-row">
+          <div class="input-col">
+            <span>働き寸法</span>
+            <input type="number" id="input_working_length" />
+          </div>
+          <div class="input-col">
+            <span>追出指定</span>
+            <input type="number" id="input_extra_specified" />
+          </div>
+          <div class="input-col">
+            <span>使用材</span>
+            <input type="number" id="input_material_length" />
+          </div>
+          <div class="input-col">
+            <span>継手長さ</span>
+            <input type="number" id="input_splice_length" />
+          </div>
+        </div>
+        <div class="input-row">
+          <div class="input-col">
+            <span>ｱﾝｶ－</span>
+            <input type="number" id="input_anchor1" />
+          </div>
+          <div class="canvas-col">
+            <canvas id="anchorCanvas" width="120" height="60"></canvas>
+          </div>
+          <div class="input-col">
+            <span>ｱﾝｶ－</span>
+            <input type="number" id="input_anchor2" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Kết quả -->
+      <div class="form-column">
+        <label class="form-header">結果</label>
+        <div class="result-row">
+          <div class="input-col">
+            <span>追出指定</span>
+            <input type="number" id="result_extra_specified" readonly />
+          </div>
+          <div class="input-col">
+            <span>使用材</span>
+            <input type="number" id="result_material_length" readonly />
+          </div>
+          <div class="input-col">
+            <span>回数</span>
+            <input type="number" id="result_repeat_count" readonly />
+          </div>
+          <div class="input-col">
+            <span>残追出</span>
+            <input type="number" id="result_remain_extra" readonly />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+	
+<div class="tool-section">
+  <div class="tool-header">②階段 蹴上・踏面・スラブ厚 → 段筋算出</div>
+  <div class="tool-body">
+    <div class="form-layout">
+      <!-- Nhập liệu -->
+      <div class="form-column">
+        <label class="form-header">入力項目</label>
+        <div class="input-row">
+          <div class="input-col">
+            <span>蹴上</span>
+            <input type="number" id="input_kegai" />
+          </div>
+          <div class="input-col">
+            <span>踏面</span>
+            <input type="number" id="input_fumizen" />
+          </div>
+          <div class="input-col">
+            <span>スラブ厚</span>
+            <input type="number" id="input_slab_thickness" />
+          </div>
+          <div class="input-col">
+            <span>段数</span>
+            <input type="number" id="input_step_count" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Kết quả -->
+      <div class="form-column">
+        <label class="form-header">結果</label>
+
+        <div class="result-row">
+          <div class="canvas-col  wide-col">
+            <canvas id="stairCanvas" width="220" height="120"></canvas>
+          </div>
+        </div>
+
+        <div class="result-row">
+          <div class="input-col">
+            <span>蹴上</span>
+            <input type="number" id="result_kegai" readonly />
+          </div>
+          <div class="input-col">
+            <span>踏面</span>
+            <input type="number" id="result_fumizen" readonly />
+          </div>
+          <div class="input-col">
+            <span>斜辺</span>
+            <input type="number" id="result_hypotenuse" readonly />
+          </div>
+          <div class="input-col">
+            <span>切寸法</span>
+            <input type="number" id="result_cutlength" readonly />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+	
+	
+	<div class="tool-section">
+  <div class="tool-header">③ 柱幅・柱間距離 → 梁主筋算出</div>
+  <div class="tool-body">
+    <div class="form-layout">
+      <!-- Nhập liệu -->
+      <div class="form-column">
+        <label class="form-header">入力項目</label>
+        <div class="input-row">
+          <div class="input-col">
+            <span>上定着</span>
+            <input type="number" id="input_anchorage_top" />
+          </div>
+          <div class="input-col">
+            <span>下定着</span>
+            <input type="number" id="input_anchorage_bottom" />
+          </div>
+          <div class="input-col">
+            <span>径</span>
+            <input type="number" id="input_diameter" />
+          </div>  
+          <div class="input-col">
+            <span>引き込み</span>
+            <input type="number" id="input_pullback" />
+          </div>
+        </div>
+		
+		
+		<div class="input-row">
+		  <div class="input-col">
+			<span>上余長</span>
+			<input type="number" id="input_column_top_margin" />
+		  </div>
+		  <div class="input-col">
+			<span>下余長</span>
+			<input type="number" id="input_column_bottom_margin" />
+		  </div>
+		  <div class="input-col">
+			<span>腹筋定着</span>
+			<input type="number" id="input_column_anchor_length" />
+		  </div>
+		  <div class="input-col">
+			<span>ST@</span>
+			<input type="number" id="input_st_spacing" />
+		  </div>
+		</div>
+		
+        <div class="input-row">
+          <div class="input-col">
+            <span>柱幅</span>
+            <input type="number" id="input_column_width_start" />
+          </div>
+          <div class="input-col">
+            <span>内法寸法(Lo)</span>
+            <input type="number" id="input_column_spacing" />
+          </div>
+          <div class="input-col">
+            <span>柱幅</span>
+            <input type="number" id="input_column_width_end" />
+          </div>
+          <div class="input-col">
+            <span>内法寸法(Lo')</span>
+            <input type="number" id="input_column_spacing2" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Kết quả -->
+      <div class="form-column">
+        <label class="form-header">結果</label>
+
+        <div class="result-row">
+          <div class="input-col">
+            <span>上アンカ</span>
+            <input type="number" id="output_anchor_top1" readonly />
+          </div>
+          <div class="input-col wide-col">
+            <span>働き寸法</span>
+            <input type="number" id="output_effective_length" readonly />
+          </div>
+          <div class="input-col">
+            <span>上アンカ</span>
+            <input type="number" id="output_anchor_top2" readonly />
+          </div>
+        </div>
+
+        <div class="result-row">
+          <div class="input-col">
+            <span>下アンカ</span>
+            <input type="number" id="output_anchor_bottom1" readonly />
+          </div>
+          <div class="canvas-col">
+            <canvas id="beamCanvas" width="120" height="60"></canvas>
+          </div>
+          <div class="input-col">
+            <span>下アンカ</span>
+            <input type="number" id="output_anchor_bottom2" readonly />
+          </div>
+        </div>
+        <label class="form-header">TOP筋</label>
+		<div class="result-row">
+		  <div class="input-col">
+			<span>端部</span>
+			<input type="number" id="output_end" readonly />
+		  </div>
+		  <div class="input-col">
+			<span>単独中央</span> 
+			<input type="number" id="output_center_single" readonly />
+		  </div>
+		  <div class="input-col">
+			<span>外端中央</span> 
+			<input type="number" id="output_center_outer" readonly />
+		  </div>
+		  <div class="input-col">
+			<span>連続端</span> 
+			<input type="number" id="output_end_continuous" readonly />
+		  </div>
+		</div>
+		<div class="result-row">
+		  <div class="input-col">
+			<span>ST-枚数</span> 
+			<input type="number" id="output_st_count" readonly />
+		  </div>
+		  <div class="input-col">
+			<span>腹筋</span> 
+			<input type="number" id="output_column_anchor_length" readonly />
+		  </div>
+			<div class="input-col">
+			  <span>段数</span>
+			  <input type="number" id="input_column_stage_count" />
+			</div>
+		  <div class="input-col">
+			<span>幅止め</span> 
+			<input type="number" id="output_habadome_count" readonly />
+		  </div>
+		</div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tool-section">
+  <div class="tool-header">④ 短辺・長辺 → 壁・スラブ配筋図</div>
+  <div class="tool-body">
+    <div class="form-layout">
+      <!-- Nhập liệu -->
+      <div class="form-column">
+        <label class="form-header">入力項目</label>
+
+        <!-- 短辺入力 -->
+        <div class="input-row">
+          <div class="input-col">
+            <span>短辺</span>
+            <input type="number" id="input_short_length" />
+          </div>
+          <div class="input-col">
+            <span>＠</span>
+            <input type="number" id="input_short_spacing" />
+          </div>
+          <div class="input-col">
+            <span>径</span>
+            <input type="number" id="input_short_diameter" />
+          </div>
+          <div class="input-col">
+            <span>上定着</span>
+            <input type="number" id="input_wall_anchorage_top" />
+          </div>
+        </div>
+
+        <!-- 長辺入力 -->
+        <div class="input-row">
+          <div class="input-col">
+            <span>長辺</span>
+            <input type="number" id="input_long_length" />
+          </div>
+          <div class="input-col">
+            <span>＠</span>
+            <input type="number" id="input_long_spacing" />
+          </div>
+          <div class="input-col">
+            <span>径</span>
+            <input type="number" id="input_long_diameter" />
+          </div>
+          <div class="input-col">
+            <span>下定着</span>
+            <input type="number" id="input_wall_anchorage_bottom" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Kết quả -->
+      <div class="form-column">
+        <label class="form-header">結果</label>
+
+        <!-- 主筋 -->
+        <div class="result-row">
+          <div class="input-col"><span>主筋</span></div>
+        </div>
+
+        <div class="result-row">
+          <div class="input-col">
+            <span>下筋</span>
+            <input type="number" id="main_rebar_bottom_dan" readonly />
+          </div>
+          <div class="input-col">
+            <span>本数</span>
+            <input type="number" id="main_rebar_count" readonly />
+          </div>
+          <div class="input-col">
+            <span>上筋</span>
+            <input type="number" id="main_rebar_top_dan" readonly />
+          </div>
+          <div class="input-col">
+            <span>本数</span>
+            <input type="number" id="main_rebar_count1" readonly />
+          </div>
+        </div>
+
+        <!-- 配力筋 -->
+        <div class="result-row">
+          <div class="input-col"><span>配力</span></div>
+        </div>
+
+        <div class="result-row">
+          <div class="input-col">
+            <span>下筋</span>
+            <input type="number" id="distribution_rebar_bottom_dan" readonly />
+          </div>
+          <div class="input-col">
+            <span>本数</span>
+            <input type="number" id="distribution_rebar_count" readonly />
+          </div>
+          <div class="input-col">
+            <span>上筋</span>
+            <input type="number" id="distribution_rebar_top_dan" readonly />
+          </div>
+          <div class="input-col">
+            <span>本数</span>
+            <input type="number" id="distribution_rebar_count1" readonly />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+	
+<div class="tool-section">
+  <div class="tool-header">⑤直角三角形 高さ・底辺長さ → 斜長・角度算出</div>
+  <div class="tool-body">
+    <div class="form-layout">
+      <!-- Nhập liệu -->
+      <div class="form-column">
+        <label class="form-header">直角三角形</label>
+        <div class="input-row">
+          <div class="input-col">
+            <span>高さ</span>
+            <input type="number" id="input_takasa" />
+          </div>
+          <div class="input-col">
+            <span>底辺長さ</span>
+            <input type="number" id="input_teihen" />
+          </div>
+		  <div class="input-col">
+            <span>斜辺長さ</span>
+            <input type="number" id="result_shahen" readonly />
+          </div>
+          <div class="input-col">
+            <span>角度</span>
+            <input type="number" id="result_kakudo" readonly />
+          </div>
+      </div>
+	  <div class="input-row">
+          <div class="canvas-col  wide-col">
+            <canvas id="triangleCanvas" width="220" height="120"></canvas>
+          </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+	
+
+
+
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
 <div class="fixed-buttons">
+  <button class="btn save-btn" onclick="exportTableToFile()">
+    <i class="fas fa-save"></i> 保存
+  </button>
+  <button class="btn open-btn" onclick="document.getElementById('fileInput').click()">
+    <i class="fas fa-folder-open"></i> 開く
+  </button>
+<button class="btn calc-btn" onclick="openToolPopup()">
+  <i class="fas fa-calculator"></i> 計算
+</button>
+  <button class="btn add-row" onclick="exportTable()">
+    <i class="fas fa-book"></i> 加工帳
+  </button>
   <button class="btn print" onclick="exportPDF()">
     <i class="fas fa-print"></i> 印刷
   </button>
+  <input type="file" id="fileInput" accept=".json" style="display:none" onchange="loadFromFile(this)">
 </div>
+
+<div id="footer">
+  <div class="footer-content">
+    <img class="footer-logo" src="https://storage.googleapis.com/studio-design-asset-files/projects/xmaZoKkAWR/s-840x131_v-fs_webp_e2de4307-8f3d-4c90-b3f0-0daec577ddd4_small.webp" alt="Logo">
+  </div>
+</div>
+<script src="common.js"></script>
 <script>
 
-  let lastInsertedRow = null;
-  let selectedCanvas = null;
-  let isCanvasScaled = false; 
-  let currentRow = null;
-  let touchTimer = null;
-  const fixedAddress = "福岡県那珂川西畑1054番地1";
-  const addressInput = document.getElementById("site-address");
-  const transportLabel = document.getElementById("transport-label");
-  const locationIQKey = "pk.85eee324f556e13b7c5ba1d74edef695";
+  const cutPricePerBend = 30;
+  const bendPricePerBend = 30;
+  const materialPricePerKg = 115;
+
   const overlay = document.getElementById("overlay");
   const popup = document.getElementById("shapePopup");
   const diaInput = document.getElementById("dia");
   const suffixes = ["a", "b", "c", "d", "e", "f", "bend1", "bend2", "bend3", "bend4", "bend5"];
   const selector = suffixes.map(suffix => `input[id^="s"][id$="${suffix}"]`).join(", ");
-  const today = new Date().toISOString().split('T')[0];
+  const today = localISODate();
   const table = document.getElementById("rebarTable");
+  const rowTemplate = document.querySelector("#dataBody tr").cloneNode(true);
   const contextMenu = document.getElementById("contextMenu");
   const validDiameters = [10, 13, 16, 19, 22, 25, 29, 32, 35, 38, 41];
-  const cutPricePerBend = 25;
-  const bendPricePerBend = 25;
-  const materialPricePerKg = 110;
   const kgPerMeterMap = {10: 0.56, 13: 0.99, 16: 1.56, 19: 2.25, 22: 3.13, 25: 3.98, 29: 5.04, 32: 6.32, 35: 7.51, 38: 8.89, 41: 10.39};
+  let lastInsertedRow = null;
+  let selectedCanvas = null;
+  let isCanvasScaled = false; 
+  let currentRow = null;
+  let touchTimer = null;
+  let originalHeight = window.innerHeight;
+
 const shapesByTab = {
+	0: {
+		'直筋': {
+		  angles: [],
+		  params: ['a'],
+		  calculate: ({ a }) => a,
+		  highlight: ['a']
+		}
+	  },
   1: {
     '片アンカー': {
       angles: [90],
       params: ['a', 'b', 'dBar'],
       calculate: ({ a, b, dBar }) => a + b - 2 * dBar,
-      highlight: ['b']
+      highlight: ['a', 'b']
     },
     'フック': {
       angles: [180],
@@ -987,16 +1700,16 @@ const shapesByTab = {
       highlight: ['b']
     },
     'への字': {
-      angles: [135],
+      angles: [45],
       params: ['a', 'b', 'dBar'],
       calculate: ({ a, b, dBar }) => a + b,
-      highlight: ['b']
+      highlight: ['a', 'b']
     },
-    'ツメ（45°）': {
-      angles: [45],
-      params: ['b', 'dBar'],
-      calculate: ({ b, dBar }) => b + 10 * dBar,
-      highlight: ['b']
+    'ツメ': {
+      angles: [135],
+      params: ['a', 'b', 'dBar'],
+      calculate: ({ a, b, dBar }) => a + b + 10 * dBar,
+      highlight: ['a', 'b']
     }
   },
   2: {
@@ -1004,34 +1717,58 @@ const shapesByTab = {
       angles: [90, 90],
       params: ['a','b','c', 'dBar'],
       calculate: ({ a, b, c, dBar }) => a + b + c - 2 * 2 * dBar,
-      highlight: ['b']
+      highlight: ['a', 'b', 'c']
     },
     '逆アンカー': {
       angles: [90, -90],
       params: ['a','b','c', 'dBar'],
       calculate: ({ a, b, c, dBar }) => a + b + c - 2 * 2 * dBar,
+      highlight: ['a', 'b', 'c']
+    },
+    '逆への字': {
+      angles: [45, -45],
+      params: ['a','b','c'],
+      calculate: ({ a, b, c}) => a + b + c,
       highlight: ['b']
     },
     '幅止め': {
-      angles: [-45, -90],
+      angles: [-135, -90],
       params: ['b', 'dBar'],
       calculate: ({ b, dBar }) => b + 18 * dBar,
+      highlight: ['b']
+    },
+    '両フック': {
+      angles: [-135, -135],
+      params: ['b', 'dBar'],
+      calculate: ({ b, dBar }) => b + 18 * dBar,
+      highlight: ['b']
+    },
+    '中子': {
+      angles: [180, 180],
+      params: ['b', 'dBar'],
+      calculate: ({ b, dBar }) => b + 20 * dBar,
       highlight: ['b']
     },
     '吊り': {
       angles: [180, 90],
       params: ['b','c' ,'dBar'],
       calculate: ({ b, c, dBar }) => b + c + 10 * dBar,
-      highlight: ['b']
+      highlight: ['b', 'c']
     },
     '逆吊り': {
       angles: [180, -90],
       params: ['b','c', 'dBar'],
       calculate: ({ b, c, dBar }) => b + c + 10 * dBar,
-      highlight: ['b']
+      highlight: ['b', 'c']
     }
   },
   3: {
+    '段筋': {
+      angles: [135, -135, 135],
+      params: ['a', 'b', 'c', 'd', 'dBar'],
+      calculate: ({ a, b, d, dBar }) => a*d + b*d + 40*dBar,
+      highlight: ['a','b','c', 'd']
+    },
     '壁-ＳＴ': {
       angles: [180, 90, 90],
       params: ['b', 'c', 'd', 'dBar'],
@@ -1039,41 +1776,41 @@ const shapesByTab = {
       highlight: ['b', 'c']
     },
     '片船形': {
-      angles: [180, 45, -45],
+      angles: [180, 135, -45],
       params: ['b', 'c', 'd', 'dBar'],
       calculate: ({ b, c, d, dBar }) => b + c + d + 10 * dBar,
-      highlight: ['b', 'c']
+      highlight: ['b', 'c', 'd']
     },
     'フカシウマ': {
       angles: [90, 90, 90],
       params: ['a', 'b', 'c', 'd', 'dBar'],
       calculate: ({ a, b, c, d, dBar }) => a + b + c + d - 8 * dBar,
-      highlight: ['b', 'c']
+      highlight: ['a','b','c', 'd']
     }
   },
   4: {
-    'ウマ': {
-      angles: [-135, -90, -90, 135],
-      params: ['a', 'c', 'd', 'dBar'],
-      calculate: ({ a, c, d, dBar }) => 2*a + c + 2*d - 8 * dBar,
-      highlight: ['a', 'c', 'd']
-    },
-    '逆ウマ': {
-      angles: [-45, -90, -90, -135],
-      params: [ 'b', 'c', 'e', 'dBar'],
-      calculate: ({ b, c, e, dBar }) => 2*b + c + 2*e - 8 * dBar,
-      highlight: ['b', 'c', 'e']
-    },
-    'スタラップ': {
+    'ラッキョ': {
       angles: [180, 90, 90, 180],
       params: ['c', 'd', 'dBar'],
       calculate: ({ c, d, dBar }) => 2 * c + 2 * d + 16 * dBar,
       highlight: ['c', 'd']
     },
+    'ウマ': {
+      angles: [135, -90, -90, -135],
+      params: ['a', 'c', 'd', 'dBar'],
+      calculate: ({ a, c, d, dBar }) => 2*a + c + 2*d - 8 * dBar,
+      highlight: ['a', 'c', 'd']
+    },
+    '逆ウマ': {
+      angles: [45, -90, -90, 135],
+      params: [ 'b', 'c', 'e', 'dBar'],
+      calculate: ({ b, c, e, dBar }) => 2*b + c + 2*e - 8 * dBar,
+      highlight: ['b', 'c', 'e']
+    },
     '船形': {
-      angles: [-90, 135, 135, -90],
+      angles: [-45, 45, 45, -45],
       params: ['b', 'c', 'e', 'dBar'],
-      calculate: ({ b, c, e, dBar }) => 2*b + c + +2*e ,
+      calculate: ({ b, c, e, dBar }) => 2*b + c + 2*e ,
       highlight: ['b','c', 'e']
     },
     'ガネー': {
@@ -1085,7 +1822,7 @@ const shapesByTab = {
   },
   5: {
     'スタラップ': {
-      angles: [45, 90, 90, 90, 45],
+      angles: [135, 90, 90, 90, 135],
       params: ['c', 'd', 'dBar'],
       calculate: ({ c, d, dBar }) => 2 * c + 2 * d + 12 * dBar,
       highlight: ['c', 'd']
@@ -1105,197 +1842,19 @@ const shapesByTab = {
   }
 };
 
-function updateDistanceLabel(distanceKm) {
-  if (transportLabel) {
-    transportLabel.textContent = `運搬: (${distanceKm} km)`;
-  }
-}
-
-async function getLatLngFromAddress(address) {
-  const url = `https://us1.locationiq.com/v1/search?key=${locationIQKey}&q=${encodeURIComponent(address)}&format=json`;
-  const response = await fetch(url);
-  const data = await response.json();
-  if (data && data.length > 0) {
-    return {
-      lat: parseFloat(data[0].lat),
-      lon: parseFloat(data[0].lon),
-    };
-  }
-}
-
-async function calculateDistance(userAddress) {
-  try {
-    const [from, to] = await Promise.all([
-      getLatLngFromAddress(userAddress),
-      getLatLngFromAddress(fixedAddress)
-    ]);
-
-    const routeUrl = `https://us1.locationiq.com/v1/directions/driving/${from.lon},${from.lat};${to.lon},${to.lat}?key=${locationIQKey}&overview=false`;
-    const routeResponse = await fetch(routeUrl);
-    const routeData = await routeResponse.json();
-
-    if (routeData.routes && routeData.routes.length > 0) {
-      const meters = routeData.routes[0].distance;
-      const km = Math.round(meters / 1000);
-      updateDistanceLabel(km);
-	  updateTransportSelection(km);
-    } else {
-    }
-  } catch (err) {
-  }
-}
-function updateTransportSelection(distanceKm) {
-  const transportSelect = document.getElementById("transport-select");
-  if (!transportSelect) return;
-
-  if (distanceKm <= 15) {
-    for (let option of transportSelect.options) {
-      if (option.value === "0" && option.text.includes("無料")) {
-        transportSelect.value = option.value;
-        break;
-      }
-    }
-  }
-}
-const deliveryDateInput = document.getElementById("delivery-date");
-deliveryDateInput.addEventListener("change", () => {
-  const inputVal = addressInput.value.trim();
-  if (inputVal) {
-    calculateDistance(inputVal); 
-  }
+document.querySelectorAll("input").forEach(input => {
+  input.addEventListener("focus", () => {
+    setTimeout(() => {
+      input.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 300);
+  });
 });
-
-function dimLetterToIndex(letter) {
-  return letter.toLowerCase().charCodeAt(0) - 97 + 1; 
-}
-function updateLength(tabIndex) {
-  const select = document.querySelector(`.angle-preset[data-tab="${tabIndex}"]`);
-  if (!select) return;
-
-  const selected = select.value;
-  if (!selected) return;
-
-  const shape = shapesByTab[tabIndex]?.[selected];
-  if (!shape || typeof shape.calculate !== 'function') return;
-
-  const diaInput = document.getElementById('dia');
-  const dBar = diaInput ? parseFloat(diaInput.value) || 0 : 0;
-
-  const args = {};
-  shape.params.forEach(param => {
-    if (param === 'dBar') {
-      args[param] = dBar;
-    } else {
-      const input = document.getElementById(`s${tabIndex}${param}`);
-      args[param] = input ? (parseFloat(input.value) || 0) : 0;
-    }
-  });
-
-  const length = shape.calculate(args);
-  const lenInput = document.getElementById('len');
-  if (lenInput) {
-    lenInput.value = length.toFixed(0);
-  }
-}
-
-function initAnglePresets() {
-  const selects = document.querySelectorAll('.angle-preset');
-  selects.forEach(select => {
-    const tabIndex = parseInt(select.dataset.tab);
-    const shapes = shapesByTab[tabIndex];
-    if (!shapes) return;
-
-    select.innerHTML = '<option value="">形状選択...</option>';
-    for (const shapeName in shapes) {
-      const option = document.createElement('option');
-      option.value = shapeName;
-      option.textContent = shapeName;
-      select.appendChild(option);
-    }
-
-    select.addEventListener('change', function () {
-      const selected = this.value;
-      const shape = shapes[selected];
-      if (!shape) return;
-
-      // Xóa highlight cũ
-      document.querySelectorAll(`#s${tabIndex}a, #s${tabIndex}b, #s${tabIndex}c, #s${tabIndex}d, #s${tabIndex}e, #s${tabIndex}f`)
-        .forEach(input => {
-          input.classList.remove('highlight-dim');
-          const labelSpan = input.parentElement.querySelector('span');
-          if (labelSpan) labelSpan.classList.remove('highlight-label');
-        });
-
-      // Thêm highlight theo shape.highlight
-      (shape.highlight ?? []).forEach(letter => {
-        const input = document.getElementById(`s${tabIndex}${letter}`);
-        if (input) {
-          input.classList.add('highlight-dim');
-          const labelSpan = input.parentElement.querySelector('span');
-          if (labelSpan) labelSpan.classList.add('highlight-label');
-        }
-      });
-
-      // Gán giá trị góc bẻ vào input tương ứng s{tab}bend{i}
-      const angles = shape.angles ?? [];
-      for (let i = 0; ; i++) {
-        const bendInput = document.getElementById(`s${tabIndex}bend${i + 1}`);
-        if (!bendInput) break;
-        bendInput.value = angles[i] ?? angles[angles.length - 1] ?? '';
-      }
-
-      updateLength(tabIndex);
-
-      drawSample();
-    });
-
-    ['a','b','c','d','e','f'].forEach(letter => {
-  const input = document.getElementById(`s${tabIndex}${letter}`);
-  if (input) {
-    input.addEventListener('input', () => {
-      updateLength(tabIndex);
-      drawSample();
-
-      // Nếu không có angle-preset thì gọi updateLengthFromABC
-      const anglePreset = document.querySelector(`.angle-preset[data-tab="${tabIndex}"]`);
-      if (!anglePreset) {
-        updateLengthFromABC(tabIndex);
-      }
-    });
-  }
-});
-
-  });
-
-const diaInput = document.getElementById('dia');
-if (diaInput) {
-  diaInput.addEventListener('input', () => {
-    // Lấy tab đang active, ưu tiên biến currentTabIndex nếu có
-    let tabIndex = typeof currentTabIndex === 'number'
-      ? currentTabIndex
-      : (() => {
-          const activeTabBtn = document.querySelector('.tab-btn.active');
-          return activeTabBtn ? parseInt(activeTabBtn.dataset.shape) : null;
-        })();
-
-    if (tabIndex !== null) {
-      updateLength(tabIndex);
-      drawSample();
-
-      const anglePreset = document.querySelector(`.angle-preset[data-tab="${tabIndex}"]`);
-      if (!anglePreset) {
-        updateLengthFromABC(tabIndex);
-      }
-    }
-  });
-}
-}
-
 document.querySelectorAll(selector).forEach(input => {
   input.addEventListener("input", drawSample);
 });
 
 document.addEventListener("DOMContentLoaded", function () {
+	importTable();
   const tabs = document.querySelectorAll('.tab-btn');
   const tabContents = document.querySelectorAll('.tab-content');
 initAnglePresets();
@@ -1307,6 +1866,7 @@ initAnglePresets();
       tabContents.forEach(content => {
         content.classList.toggle('active', content.getAttribute('data-content') === tabIndex);
       });
+	  
       const segs = ['a', 'b', 'c', 'd', 'e', 'f'];
       segs.forEach(seg => {
         const input = document.getElementById(`s${tabIndex}${seg}`);
@@ -1322,13 +1882,13 @@ initAnglePresets();
         segs.forEach(seg => selectedCanvas.dataset[seg] = "0");
       }
      drawSample();
-	 const inputA = document.getElementById(`s${tabIndex}a`);
-		inputA?.focus();
+	 
+	const diaInput = document.getElementById("dia");
+		diaInput?.focus();
     });
   });
 });
 
-let originalHeight = window.innerHeight;
 window.addEventListener('resize', () => {
   const currentHeight = window.innerHeight;
   if (currentHeight < originalHeight - 100) {
@@ -1346,7 +1906,11 @@ window.addEventListener('resize', () => {
     }
   }
 });
-
+document.querySelectorAll('input, select, textarea').forEach(el => {
+  el.addEventListener('focus', () => {
+    window.scrollTo({ left: 0, top: window.scrollY, behavior: 'instant' });
+  });
+});
 document.getElementById("rebarTable").addEventListener("keydown", function (e) {
   if (e.key === "Enter") {
     const currentRow = e.target.closest("tr");
@@ -1373,10 +1937,6 @@ document.querySelectorAll(".header-body input, .header-body select").forEach((el
       }
     }
   });
-});
-
-document.getElementById("rebarTable").addEventListener("input", () => {
-  calculateAll();
 });
 
 document.getElementById("transport-select").addEventListener("change", () => {
@@ -1483,18 +2043,25 @@ table.addEventListener("contextmenu", (e) => {
 });
 
 table.querySelectorAll(".shape-cell canvas").forEach(canvas => {
+  let touchTimer;
+  
   canvas.addEventListener("touchstart", (e) => {
-  touchTimer = setTimeout(() => {
-    const td = canvas.closest(".shape-cell");
-    if (td) {
-      currentRow = td.parentElement;
-      const touch = e.touches[0];
-      showContextMenu(touch.pageX, touch.pageY);
-    }
-  }, 600);
- });
+    e.preventDefault();  // ngăn chặn hành vi mặc định (nếu cần)
+    touchTimer = setTimeout(() => {
+      const td = canvas.closest(".shape-cell");
+      if (td) {
+        currentRow = td.parentElement;
+        const touch = e.touches[0];
+        showContextMenu(touch.pageX, touch.pageY);
+      }
+    }, 300);
+  });
+  
   canvas.addEventListener("touchend", () => clearTimeout(touchTimer));
   canvas.addEventListener("touchmove", () => clearTimeout(touchTimer));
+  
+  // Ngăn menu mặc định chuột phải (desktop)
+  canvas.addEventListener("contextmenu", e => e.preventDefault());
 });
 
 document.body.addEventListener("click", () => {
@@ -1547,85 +2114,6 @@ const lenInput = document.getElementById(`len`);
   }
 });
 
-function setupTabInputsNavigation() {
-  document.querySelectorAll('.tab-content').forEach(tab => {
-    const inputs = tab.querySelectorAll('input');
-    inputs.forEach((input) => {
-      input.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-          const activeTab = input.closest('.tab-content.active');
-          if (!activeTab) return;
-          const visibleInputs = Array.from(activeTab.querySelectorAll('input'))
-            .filter(i => i.offsetParent !== null && !i.id.includes('bend'));
-          const techInputs = ['dia', 'len', 'qty'].map(id => document.getElementById(id));
-          const allInputs = [...visibleInputs, ...techInputs];
-          const currentIndex = allInputs.indexOf(input);
-          const nextInput = allInputs[currentIndex + 1];
-          if (nextInput) {
-            nextInput.focus();
-          } else {
-            document.getElementById('applyBtn')?.focus();
-          }
-        }
-      });
-    });
-  });
-  ['dia', 'len', 'qty'].forEach((id, index, arr) => {
-    const input = document.getElementById(id);
-    input?.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        const nextId = arr[index + 1];
-        if (nextId) {
-          document.getElementById(nextId)?.focus();
-        } else {
-          document.getElementById('applyBtn')?.focus();
-        }
-      }
-    });
-  });
-  document.getElementById('applyBtn')?.addEventListener('keydown', function (e) {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      applyShape();
-    }
-  });
-}
-
-function handlePopupKeys(e) {
-  const activeTab = document.querySelector('.tab-content.active');
-  if (!activeTab) return;
-  const activeTabIndex = parseInt(activeTab.dataset.content || "0");
-  if (e.key === 'Tab') {
-    e.preventDefault();
-    const nextTabIndex = e.shiftKey
-      ? (activeTabIndex - 1 + 6) % 6
-      : (activeTabIndex + 1) % 6;
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-      const tab = btn.getAttribute('data-tab');
-      const isActive = tab === String(nextTabIndex);
-      btn.classList.toggle('active', isActive);
-      const content = document.querySelector(`.tab-content[data-content="${tab}"]`);
-      if (content) content.classList.toggle('active', isActive);
-    });
-    if (selectedCanvas) {
-      selectedCanvas.dataset.shape = String(nextTabIndex);
-    }
-    const letters = ['a', 'b', 'c', 'd', 'e', 'f'];
-    letters.forEach(l => {
-      const input = document.getElementById(`s${nextTabIndex}${l}`);
-      if (input) input.value = "";
-    });
-    ['dia', 'len', 'qty'].forEach(id => {
-      const input = document.getElementById(id);
-      if (input) input.value = "";
-    });
-
-    drawSample();
-  }
-}
-
 function openPopup(cell) {
   selectedCanvas = cell.querySelector("canvas");
   const shape = selectedCanvas.dataset.shape || "0";
@@ -1647,394 +2135,19 @@ function openPopup(cell) {
     const content = document.querySelector(`.tab-content[data-content="${tab}"]`);
     if (content) content.classList.toggle('active', isActive);
   });
+  document.getElementById('s0a')?.addEventListener('input', () => {
+  updateLength('0');
+	});
   drawSample();
   overlay.style.display = "block";
   popup.style.display = "block";
   calculateAll();
   popup.addEventListener('keydown', handlePopupKeys);
   setupTabInputsNavigation();
-   const inputA = document.getElementById(`s${shape}a`);
-	inputA?.focus();
-}
-
-function closePopup() {
-  overlay.style.display = "none";
-  popup.style.display = "none";
-  popup.removeEventListener('keydown', handlePopupKeys);
-}
-
-function setupCanvas(canvas) {
-  const dpr = window.devicePixelRatio || 1;
-  const rect = canvas.getBoundingClientRect();
-  if (rect.width === 0 || rect.height === 0) return canvas.getContext("2d");
-  canvas.width = rect.width * dpr;
-  canvas.height = rect.height * dpr;
-  canvas.style.width = rect.width + "px";
-  canvas.style.height = rect.height + "px";
-  const ctx = canvas.getContext("2d");
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  return ctx;
-}
-
-function drawLineWithLabel(ctx, x1, y1, x2, y2, label, angleLabel) {
-  if (typeof angleLabel === 'number' && angleLabel < 0) {
-    [x1, y1, x2, y2] = [x2, y2, x1, y1];
-    angleLabel = -angleLabel;
-  }
-  ctx.beginPath();
-  ctx.moveTo(x1, y1);
-  ctx.lineTo(x2, y2);
-  ctx.stroke();
-  const dx = x2 - x1, dy = y2 - y1;
-  const len = Math.sqrt(dx * dx + dy * dy);
-  const midX = (x1 + x2) / 2, midY = (y1 + y2) / 2;
-  const epsilon = 0.01;
-  let angle = Math.abs(dx) < epsilon ? -Math.PI / 2 : Math.atan2(dy, dx);
-  const offset = 10;
-  let ox, oy;
-  if (Math.abs(dx) < epsilon) {
-    ox = dy < 0 ? offset : -offset;
-    oy = 0;
-  } else if (Math.abs(dy) < epsilon) {
-    ox = 0;
-    oy = dx < 0 ? -offset : offset;
-  } else {
-    ox = (-dy / len) * offset;
-    oy = (dx / len) * offset;
-    if (dy < 0) oy = -oy;
-  }
-  if (label !== 0) {
-    ctx.save();
-    ctx.translate(midX + ox, midY + oy);
-    let textAngle = angle;
-    if (textAngle > Math.PI / 2 || textAngle < -Math.PI / 2) {
-      textAngle += Math.PI; 
-    }
-    ctx.rotate(textAngle);
-    ctx.font = "12px Arial";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillStyle = "#000";
-    ctx.fillText(label, 0, 0);
-    ctx.restore();
-  }
- const niceAngles = [0, 45, 90, 135, 180];
-  if (
-    typeof angleLabel === 'number' &&
-    !niceAngles.includes(Math.abs(angleLabel))
-  ){
-    const angleText = `${angleLabel}°`;
-    const cornerX = midX;
-    const cornerY = midY;
-    const cornerOffsetX = -ox;
-    const cornerOffsetY = -oy;
-    ctx.save();
-    ctx.translate(cornerX + cornerOffsetX, cornerY + cornerOffsetY);
-    let textAngle = angle;
-    if (textAngle > Math.PI / 2 || textAngle < -Math.PI / 2) {
-      textAngle += Math.PI;
-    }
-    ctx.rotate(textAngle);
-    ctx.font = "10px Arial";
-    ctx.fillStyle = "#777";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText(angleText, 0, 0);
-    ctx.restore();
-  }
-}
-
-function drawHook(ctx, x0, y0, angle, radius, side = 'left') {
-  const direction = side === 'left' ? -1 : 1;
-  const arcCenterX = x0 + Math.cos(angle + direction * Math.PI / 2) * radius;
-  const arcCenterY = y0 + Math.sin(angle + direction * Math.PI / 2) * radius;
-  ctx.beginPath();
-  ctx.arc(
-    arcCenterX,
-    arcCenterY,
-    radius,
-    angle + direction * Math.PI / 2,
-    angle - direction * Math.PI / 2,
-    side === 'right'
-  );
-  ctx.stroke();
-  const startAngle = angle + direction * Math.PI / 2;
-  const endX = arcCenterX + Math.cos(startAngle) * radius;
-  const endY = arcCenterY + Math.sin(startAngle) * radius;
-  const nextX = endX - Math.cos(angle) * 5;
-  const nextY = endY - Math.sin(angle) * 5;
-  drawLineWithLabel(ctx, endX, endY, nextX, nextY, 0);
-}
-
-function drawShape0(ctx, a) {
-  drawLineWithLabel(ctx, 20, 30, 70, 30, a);
-}
-
-function drawShape1(ctx, a, b, bend1) {
-  const x0 = 30, y0 = 30;
-  const x1 = x0 + 50, y1 = y0;
-  const radius = 5;
-  drawLineWithLabel(ctx, x0, y0, x1, y1, b);
-  if (bend1 === 180) {
-    const dx = x1 - x0;
-    const dy = y1 - y0;
-    const angle = Math.atan2(dy, dx);
-    const arcCenterX = x0 + Math.cos(angle - Math.PI / 2) * radius;
-    const arcCenterY = y0 + Math.sin(angle - Math.PI / 2) * radius;
-    ctx.beginPath();
-    ctx.arc(arcCenterX, arcCenterY, radius,
-            angle - Math.PI / 2,
-            angle + Math.PI / 2,
-            true); 
-    ctx.stroke();
-    drawLineWithLabel(ctx, x0, y0 - 10, x0 + dx - 40, y0 - 10, 0);
-
-  } else {
-    const rad = (180 - bend1) * Math.PI / 180;
-    const ax1 = x0, ay1 = y0;
-    const ax0 = x0 - Math.cos(rad) * 20;
-    const ay0 = y0 - Math.sin(rad) * 20;
-    drawLineWithLabel(ctx, ax0, ay0, ax1, ay1, a, bend1);
-  }
-}
-function drawShape2(ctx, a, b, c, bend1, bend2) {
-  const x0 = 30, y0 = 30; 
-  const x1 = x0 + 45, y1 = y0;
-  const radius = 5;
-    drawLineWithLabel(ctx, x0, y0, x1, y1, b);
-  if (bend1 === 180) {
-    const dx = x1 - x0;
-    const dy = y1 - y0;
-    const angle = Math.atan2(dy, dx);
-    const arcCenterX = x0 + Math.cos(angle - Math.PI / 2) * radius;
-    const arcCenterY = y0 + Math.sin(angle - Math.PI / 2) * radius;
-    ctx.beginPath();
-    ctx.arc(arcCenterX, arcCenterY, radius,
-            angle - Math.PI / 2,
-            angle + Math.PI / 2,
-            true);
-    ctx.stroke();
-    drawLineWithLabel(ctx, x0, y0 - 10, x0 + dx - 40, y0 - 10, 0);
-  }
-  else {
-    const rad = (180 - bend1) * Math.PI / 180;
-    const ax1 = x0, ay1 = y0;
-    const ax0 = x0 - Math.cos(rad) * 20;
-    const ay0 = y0 - Math.sin(rad) * 20;
-    drawLineWithLabel(ctx, ax0, ay0, ax1, ay1, a, bend1);
-  }
-  if (bend2 === 180) {
-    drawLineWithLabel(ctx, x1, y1-10, x0+35, y0-10,0);
-    const arcCenterX = x1;
-    const arcCenterY = y1-radius;
-	ctx.beginPath();
-	ctx.arc(arcCenterX, arcCenterY, radius, 3 * Math.PI / 2, Math.PI / 2, false); 
-	ctx.stroke();
-  } 
-  else {
-    const rad = (bend2) * Math.PI / 180;
-    const cx0 = x1, cy0 = y1;
-    const cx1 = x1 - Math.cos(rad) * 20;
-    const cy1 = y1 - Math.sin(rad) * 20;
-    drawLineWithLabel(ctx, cx0, cy0, cx1, cy1, c, bend2);
-  }
-}
-
-function drawShape3(ctx, a, b, c, d, bend1, bend2, bend3) {
-  const x0 = 15, y0 = 30;
-  const radius = 5;
-  const x1 = x0 + 45, y1 = y0;
-  drawLineWithLabel(ctx, x0, y0, x1, y1, b);
-  if (bend1 === 180) {
-    drawLineWithLabel(ctx, x0, y0 - 10, x1 - 35, y1 - 10, 0);
-    const arcCenterX = x0;
-    const arcCenterY = y0 - radius;
-    ctx.beginPath();
-    ctx.arc(arcCenterX, arcCenterY, radius, 3 * Math.PI / 2, Math.PI / 2, true);
-    ctx.stroke();
-  } else {
-    const rad = (180 - bend1) * Math.PI / 180;
-    const ax1 = x0, ay1 = y0;
-    const ax0 = x0 - Math.cos(rad) * 15;
-    const ay0 = y0 - Math.sin(rad) * 15;
-    drawLineWithLabel(ctx, ax0, ay0, ax1, ay1, a, bend1);
-  }
-  const cx0 = x1, cy0 = y1;
-  const rad2 = (180 - bend2) * Math.PI / 180;
-  const cx1 = cx0 + Math.cos(rad2) * 15;
-  const cy1 = cy0 - Math.sin(rad2) * 15;
-  drawLineWithLabel(ctx, cx0, cy0, cx1, cy1, c, bend2);
-  const dx0 = cx1, dy0 = cy1;
-  if (bend3 === 180) {
-    const dx = cx1 - cx0;
-    const dy = cy1 - cy0;
-    const angle = Math.atan2(dy, dx);
-    const arcCenterX = dx0 + Math.cos(angle - Math.PI / 2) * radius;
-    const arcCenterY = dy0 + Math.sin(angle - Math.PI / 2) * radius;
-    ctx.beginPath();
-    ctx.arc(
-      arcCenterX,
-      arcCenterY,
-      radius,
-      angle - Math.PI / 2,
-      angle + Math.PI / 2,
-      false
-    );
-    ctx.stroke();
-  const startAngle = angle - Math.PI / 2;
-  const endX = arcCenterX + Math.cos(startAngle) * radius;
-  const endY = arcCenterY + Math.sin(startAngle) * radius;
-  const nextX = endX - Math.cos(angle) * 5;
-  const nextY = endY - Math.sin(angle) * 5;
-  drawLineWithLabel(ctx, endX, endY, nextX, nextY, 0);
-  } else {
-    const rad3 = (180 - bend2 + bend3) * Math.PI / 180;
-    const dx1 = dx0 + Math.cos(rad3) * 20;
-    const dy1 = dy0 - Math.sin(rad3) * 20;
-    drawLineWithLabel(ctx, dx1, dy1, dx0, dy0, d, bend3);
-  }
-}
-
-function drawShape4(ctx, a, b, c, d, e, bend1, bend2, bend3, bend4) {
-  const x0 = 22; 
-  const y0 = (bend2 < 0 || bend4 < 0) ? 25 : 30;
-  const radius = 5;
-  const x1 = x0 + 45, y1 = y0; 
-  drawLineWithLabel(ctx, x0, y0, x1, y1, c);
-  const bx0 = x0, by0 = y0;
-  const rad2 = (bend2 - 180) * Math.PI / 180;
-  const bx1 = bx0 - Math.cos(rad2) * 15;
-  const by1 = by0 + Math.sin(rad2) * 15;
-  drawLineWithLabel(ctx, bx1, by1, bx0, by0, b, bend2);
-  const ax0 = bx1, ay0 = by1;
-  if (bend1 === 180) {
-    const dx = bx1 - bx0;
-    const dy = by1 - by0;
-    const angle = Math.atan2(dy, dx);
-    drawHook(ctx, ax0, ay0, angle, radius, 'right');
-  } else {
-    const rad1 = (bend1 - 270) * Math.PI / 180;
-    const ax1 = ax0 - Math.cos(rad1) * 15;
-    const ay1 = ay0 + Math.sin(rad1) * 15;
-    drawLineWithLabel(ctx, ax0, ay0, ax1, ay1, a, bend1);
-  }
-  const dx0 = x1, dy0 = y1;
-  const rad3 = (180 - bend3) * Math.PI / 180;
-  const dx1 = dx0 + Math.cos(rad3) * 15;
-  const dy1 = dy0 - Math.sin(rad3) * 15;
-  drawLineWithLabel(ctx, dx0, dy0, dx1, dy1, d, bend3);
-  const ex0 = dx1, ey0 = dy1;
-  if (bend4 === 180) {
-    const dx = dx1 - dx0;
-    const dy = dy1 - dy0;
-    const angle = Math.atan2(dy, dx);
-    drawHook(ctx, ex0, ey0, angle, radius, 'left'); 
-  } else {
-    const rad4 = (270 - bend4) * Math.PI / 180;
-    const ex1 = ex0 + Math.cos(rad4) * 15;
-    const ey1 = ey0 - Math.sin(rad4) * 15;
-    drawLineWithLabel(ctx, ex1, ey1, ex0, ey0, e, bend4);
-  }
-}
-
-function drawShape5(ctx, a, b, c, d, e, f, bend1, bend2, bend3, bend4, bend5) {
-   const x0 = 22;
-  let y0 = 20;
-  if (bend3 === 90) {
-    y0 = 35;
-  }
-  const radius = 5;
-  const x1 = x0 + 45, y1 = y0; 
-  drawLineWithLabel(ctx, x0, y0, x1, y1, c);
-  const bx0 = x0, by0 = y0;
-  const rad2 = (bend2 - 180) * Math.PI / 180;
-    const lenB = (bend1 === 45 && bend5 === 45) ? 18 : 15;
-  const bx1 = bx0 - Math.cos(rad2) * 15;
-  const by1 = by0 + Math.sin(rad2) * 15;
-  const bx1a = bx0 - Math.cos(rad2) * lenB;
-  const by1a = by0 + Math.sin(rad2) * lenB;
-  drawLineWithLabel(ctx, bx1, by1, bx0, by0, b, bend2);
-  drawLineWithLabel(ctx, bx1a, by1a, bx0, by0, 0);
-  const ax0 = bx1, ay0 = by1;
-  if (bend1 === 180) {
-    const dx = bx1 - bx0;
-    const dy = by1 - by0;
-    const angle = Math.atan2(dy, dx);
-    drawHook(ctx, ax0, ay0, angle, radius, 'right'); 
-  } else {
-    const rad1 = (bend1 - 270) * Math.PI / 180;
-    const lenA = (bend1 === 45 && bend5 === 45) ? 8 : 15;
-    const ax1 = ax0 - Math.cos(rad1) * lenA;
-    const ay1 = ay0 + Math.sin(rad1) * lenA;
-    drawLineWithLabel(ctx, ax0, ay0, ax1, ay1, a);
-  }
-  const dx0 = x1, dy0 = y1;
-  const rad3 = (180 - bend3) * Math.PI / 180;
-  const dx1 = dx0 + Math.cos(rad3) * 18;
-  const dy1 = dy0 - Math.sin(rad3) * 18;
-  drawLineWithLabel(ctx, dx0, dy0, dx1, dy1, d, bend3);
-  const ex0 = dx1, ey0 = dy1;
-    const rad4 = (270 - bend4) * Math.PI / 180;
-let lenE = 15;
-if (bend4 === 90) {
-  lenE = (bend1 === 45 && bend5 === 45) ? 45 : 42;
-}
-    const ex1 = ex0 + Math.cos(rad4) * 42;
-    const ey1 = ey0 - Math.sin(rad4) * 42;
-    const ex1a = ex0 + Math.cos(rad4) * lenE;
-    const ey1a = ey0 - Math.sin(rad4) * lenE;
-    drawLineWithLabel(ctx, ex1, ey1, ex0, ey0, e, bend4);
-    drawLineWithLabel(ctx, ex1a, ey1a, ex0, ey0, 0);
-  const fx0 = ex1, fy0 = ey1;
-  const rad5 = (bend5) * Math.PI / 180;
-  const lenF = (bend1 === 45 && bend5 === 45) ? 8 : 15;
-  const fx1 = fx0 + Math.cos(rad5) * lenF;
-  const fy1 = fy0 + Math.sin(rad5) * lenF;
-  if (bend5 === 180) {
-    const dx = fx1 - fx0;
-    const dy = fy1 - fy0;
-    const angle = Math.atan2(dy, dx);
-    drawHook(ctx, fx0, fy0, angle, radius, 'left');
-  } else {
-    drawLineWithLabel(ctx, fx0, fy0, fx1, fy1, f);
-  }
-}
-
-function drawSample() {
-  const scale = 2;
-  [0, 1, 2, 3, 4, 5].forEach(id => {
-    const canvas = document.getElementById(`shape${id}`);
-    const ctx = setupCanvas(canvas);
-    const segments = ["a", "b", "c", "d", "e", "f"];
-const [a, b, c, d, e, f] = segments.map(seg => {
-  const el = document.getElementById(`s${id}${seg}`);
-  const val = parseFloat(el?.value);
-  if (!el || el.value.trim() === "") return 0;
-  return isNaN(val) ? 0 : val; 
-});
-    const [bend1, bend2, bend3, bend4, bend5] = [1, 2, 3, 4, 5].map(i => {
-      const val = parseFloat(document.getElementById(`s${id}bend${i}`)?.value || "0");
-      return isNaN(val) ? 0 : val;
-    });
-    if (!isCanvasScaled) {
-      const originalWidth = canvas.width;
-      const originalHeight = canvas.height;
-      canvas.width = originalWidth * scale;
-      canvas.height = originalHeight * scale; 
-      isCanvasScaled = true; 
-    }    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.save();
-    ctx.scale(scale, scale);
-    switch (id) {
-      case 0: drawShape0(ctx, a); break;
-      case 1: drawShape1(ctx, a, b, bend1); break;
-      case 2: drawShape2(ctx, a, b, c, bend1, bend2); break;
-      case 3: drawShape3(ctx, a, b, c, d, bend1, bend2, bend3); break;
-      case 4: drawShape4(ctx, a, b, c, d, e, bend1, bend2, bend3, bend4); break;
-      case 5: drawShape5(ctx, a, b, c, d, e, f, bend1, bend2, bend3, bend4, bend5); break;
-    }
-    ctx.restore();
-  });
+  document.body.classList.add('popup-open');
+  
+	const diaInput = document.getElementById("dia");
+		diaInput?.focus();
 }
 
 function applyShape() {
@@ -2073,8 +2186,10 @@ for (let i = 1; i <= 5; i++) {
   selectedCanvas.dataset[`bend${i}`] = bendInput ? bendInput.value || "0" : "0";
 }
 selectedCanvas.dataset.shape = shape;
-
-
+  const presetSelect = document.querySelector(`.angle-preset[data-tab="${shape}"]`);
+  if (presetSelect) {
+    selectedCanvas.dataset.shapeName = presetSelect.value || "";
+  }
 
   const row = selectedCanvas.closest("tr");
   if (!row) return;
@@ -2092,77 +2207,56 @@ selectedCanvas.dataset.shape = shape;
   if (row === lastRow) {
     lastInsertedRow = addRow();
   }
+  mergeDuplicateRows();
 }
-
-function updateLengthFromABC(shapeId) {
-  const lenField = document.getElementById("len");
-  const dia = parseFloat(document.getElementById("dia")?.value || 0);
-  let totalLength = 0;
-  const segments = ["a", "b", "c", "d", "e", "f"];
-  for (let seg of segments) {
-    const input = document.getElementById(`s${shapeId}${seg}`);
-    if (input) {
-      const val = parseFloat(input.value || 0);
-      if (!isNaN(val)) {
-        totalLength += val;
-      }
-    }
-  }
-  const bends = document.querySelectorAll(`input[id^="s${shapeId}bend"]`);
-  const bendCount = bends.length;
-  const bendLoss = 2 * dia * bendCount;
-  let finalLength = totalLength - bendLoss;
-  let bend180Count = 0;
-  bends.forEach(bend => {
-    const bendValue = parseFloat(bend.value);
-    if (bendValue === 180) {
-      bend180Count++;
-    }
-  });
-  finalLength += bend180Count * 12 * dia;
-  finalLength = Math.max(Math.round(finalLength / 5) * 5, 0);
-  if (lenField) {
-    lenField.value = finalLength;
-  }
-}
-
 function calculateRow(row) {
-    const D = parseFloat(row.cells[2].textContent) || 0;
-    const length = parseFloat(row.cells[3].textContent) || 0;
-    const count = parseInt(row.cells[4].textContent) || 0;
-    const kgPerMeter = kgPerMeterMap[D] || 0;
-    const weightPerPiece = (length / 1000) * kgPerMeter;
-    const totalWeight = weightPerPiece * count;
-    const shapeCanvas = row.querySelector("canvas");
-    const shape = parseInt(shapeCanvas?.dataset?.shape || 0);
-	const exemptLengths = [];
-for (let i = 3500; i <= 12000; i += 500) {
-  exemptLengths.push(i);
-}
-let cutCost = cutPricePerBend * count;
-if (exemptLengths.includes(length)) {
-  cutCost = 0;
-}
-    const bends = getBendCountFromShape(shape);
-    const bendCost = bends * bendPricePerBend * count;
-    const materialCost = totalWeight * materialPricePerKg;
-    const totalCost = bendCost + materialCost + cutCost;
-	const formatter = new Intl.NumberFormat("ja-JP");
-row.cells[5].textContent = totalWeight.toLocaleString("ja-JP", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-row.cells[6].textContent = formatter.format(Math.round(cutCost));
-row.cells[7].textContent = formatter.format(Math.round(bendCost));
-row.cells[8].textContent = formatter.format(Math.round(materialCost));
-row.cells[9].textContent = formatter.format(Math.round(totalCost));
-    return {
-      weight: totalWeight,
-      cutCost,
-      bendCost,
-      materialCost,
-      totalCost
-    };
+  const D = parseFloat(row.cells[2].textContent) || 0;
+  const length = parseFloat(row.cells[3].textContent) || 0;
+  const count = parseInt(row.cells[4].textContent) || 0;
+  const kgPerMeter = kgPerMeterMap[D] || 0;
+  const weightPerPiece = (length / 1000) * kgPerMeter;
+  const totalWeight = weightPerPiece * count;
+
+  const shapeCanvas = row.querySelector("canvas");
+  const shape = parseInt(shapeCanvas?.dataset?.shape || 0);
+  
+	const shapeName = parseInt(shapeCanvas?.dataset?.shapeName) || 0;
+	const d = parseFloat(shapeCanvas?.dataset?.d) || 0;
+	const bend1 = parseFloat(shapeCanvas?.dataset?.bend1) || 0;
+	const bend2 = parseFloat(shapeCanvas?.dataset?.bend2) || 0;
+	const bend3 = parseFloat(shapeCanvas?.dataset?.bend3) || 0;
+
+  // Số lần cắt miễn phí với các chiều dài sau:
+  const exemptLengths = [];
+  for (let i = 3500; i <= 12000; i += 500) {
+    exemptLengths.push(i);
   }
 
-function getBendCountFromShape(shape) {
+  let cutCost = cutPricePerBend * count;
+  if (exemptLengths.includes(length)) {
+    cutCost = 0;
+  }
+
+  const bends = getBendCountFromShape(shape, bend1, bend2, bend3, d);
+  const bendCost = bends * bendPricePerBend * count;
+  const materialCost = totalWeight * materialPricePerKg;
+  const totalCost = bendCost + materialCost + cutCost;
+
+  const formatter = new Intl.NumberFormat("ja-JP");
+  row.cells[5].textContent = totalWeight.toLocaleString("ja-JP", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  row.cells[6].textContent = formatter.format(Math.round(cutCost));
+  row.cells[7].textContent = formatter.format(Math.round(bendCost));
+  row.cells[8].textContent = formatter.format(Math.round(materialCost));
+  row.cells[9].textContent = formatter.format(Math.round(totalCost));
+
+  return {
+    weight: totalWeight,
+    cutCost,
+    bendCost,
+    materialCost,
+    totalCost
+  };
+}function getBendCountFromShape(shape, bend1, bend2, bend3, d, shapeName) {
   const bendMap = {
     0: 0,
     1: 1,
@@ -2171,6 +2265,12 @@ function getBendCountFromShape(shape) {
     4: 4,
     5: 5 
   };
+
+    if (bend1 === 135 && bend2 === -135 && bend3 === 135&& shape === 3) {
+      return isNaN(d) ? 0 : d * 2;
+    }
+   
+
   return bendMap[shape] || 0;
 }
 function calculateAll() {
@@ -2224,12 +2324,6 @@ function deleteCurrentPopupRow() {
   }
 }
 
-function showContextMenu(x, y) {
-  contextMenu.style.top = y + "px";
-  contextMenu.style.left = x + "px";
-  contextMenu.style.display = "block";
-}
-
 function deleteRow() {
       if (currentRow) currentRow.remove();
 	calculateAll()
@@ -2258,7 +2352,7 @@ function insertBelow() {
     }
 
 function addRow() {
-  const row = document.querySelector("#dataBody tr");
+  const row = document.querySelector("#dataBody tr") || rowTemplate;
   const clone = row.cloneNode(true);
   for (let i = 2; i <= 8; i++) {
     clone.cells[i].textContent = "";
@@ -2307,11 +2401,16 @@ async function exportPDF() {
   const tfootCanvas = await html2canvas(tfoot, { scale: 2 });
   const tfootHeightPx = tfootCanvas.height;
   const tbodyHeightPx = fullImgHeight - theadHeightPx - tfootHeightPx;
-  const rowCount = tbody.querySelectorAll("tr").length;
-  const rowHeightPx = tbodyHeightPx / rowCount;
   const rowsPerPage = 12;
-  const bodySliceHeightPx = rowHeightPx * rowsPerPage;
-  const totalPages = Math.ceil(rowCount / rowsPerPage);
+  const tRect = table.getBoundingClientRect();
+  const k = fullCanvas.width / tRect.width;
+  const rowEls = Array.from(tbody.querySelectorAll("tr"));
+  const rowY = rowEls.map(r => { const b = r.getBoundingClientRect(); return [(b.top - tRect.top) * k, b.height * k]; });
+  const tfootEl = table.querySelector("tfoot");
+  const tfootRect = tfootEl ? tfootEl.getBoundingClientRect() : null;
+  const tfootY = tfootRect ? (tfootRect.top - tRect.top) * k : 0;
+  const tfootH = tfootRect ? tfootRect.height * k : 0;
+  const totalPages = Math.max(1, Math.ceil(rowEls.length / rowsPerPage));
   for (let page = 0; page < totalPages; page++) {
     if (page > 0) {
       doc.addPage();
@@ -2319,17 +2418,18 @@ async function exportPDF() {
     }
     const canvasPage = document.createElement("canvas");
     const ctx = canvasPage.getContext("2d");
+    const first = page * rowsPerPage;
+    const last = Math.min(first + rowsPerPage, rowEls.length) - 1;
+    const srcY = rowEls.length ? rowY[first][0] : 0;
+    const bodyH = rowEls.length ? rowY[last][0] + rowY[last][1] - srcY : 0;
+    const showFoot = !!tfootEl && page === totalPages - 1;
     canvasPage.width = fullImgWidth;
-    canvasPage.height = theadHeightPx + bodySliceHeightPx;
+    canvasPage.height = Math.ceil(theadHeightPx + bodyH + (showFoot ? tfootH : 0));
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(0, 0, canvasPage.width, canvasPage.height);
     ctx.drawImage(fullCanvas, 0, 0, fullImgWidth, theadHeightPx, 0, 0, fullImgWidth, theadHeightPx);
-    const startY = theadHeightPx + page * bodySliceHeightPx;
-    ctx.drawImage(
-      fullCanvas,
-      0, startY,
-      fullImgWidth, bodySliceHeightPx,
-      0, theadHeightPx,
-      fullImgWidth, bodySliceHeightPx
-    );
+    if (bodyH > 0) ctx.drawImage(fullCanvas, 0, srcY, fullImgWidth, bodyH, 0, theadHeightPx, fullImgWidth, bodyH);
+    if (showFoot) ctx.drawImage(fullCanvas, 0, tfootY, fullImgWidth, tfootH, 0, theadHeightPx + bodyH, fullImgWidth, tfootH);
     const pageImgData = canvasPage.toDataURL("image/png");
     const pageImgHeightMM = (canvasPage.height * imgWidth) / canvasPage.width;
     doc.addImage(pageImgData, "PNG", margin, currentHeight, imgWidth, pageImgHeightMM);
@@ -2340,16 +2440,368 @@ async function exportPDF() {
   }
   const projectName = document.getElementById("project-name").value.trim() || "工事名";
   const contactRaw = document.getElementById("contact").value.trim() || "担当者";
-  const today = new Date().toISOString().split("T")[0];
+  const today = localISODate();
   const sanitize = str => str.replace(/[\\/:*?"<>|()\s]/g, "_");
   const contactFormatted = contactRaw.replace(/\s*\(?(\d{2,4})\s*(\d{2,4})\s*(\d{3,4})\)?/, "-$1$2$3");
   const fileName = `${sanitize(projectName)}_${sanitize(contactFormatted)}_${today}.pdf`;
-	  alert("鉄筋積算書をご送付の上、LINE（090-3660-1790）までご連絡いただけますと幸いです。");
+	  alert("鉄筋積算書をご送付の上、LINE（092-951-0727）までご連絡いただけますと幸いです。");
 	  doc.save(fileName);
 	  
 }
 
-  </script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('./service-worker.js').then(function (registration) {
+      console.log('ServiceWorker đăng ký thành công:', registration.scope);
+    }, function (err) {
+      console.log('ServiceWorker đăng ký thất bại:', err);
+    });
+  });
+}
+function deleteFirstRow() {
+  const tbody = document.getElementById("dataBody");
+  const firstRow = tbody.querySelector("tr");
+
+  if (firstRow) {
+    firstRow.remove();
+  }
+}
+function applyShapeToCanvas(canvas) {
+  if (!canvas) return;
+
+  const shape = canvas.dataset.shape;
+  const ctx = setupCanvas(canvas);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Đọc các đoạn chiều dài
+  const segments = ["a", "b", "c", "d", "e", "f"];
+  const [a, b, c, d, e, f] = segments.map(seg => {
+    const val = parseFloat(document.getElementById(`s${shape}${seg}`)?.value || "0");
+    return isNaN(val) ? 0 : val;
+  });
+
+  // Đọc các góc/lần bẻ
+  const [bend1, bend2, bend3, bend4, bend5] = [1, 2, 3, 4, 5].map(i => {
+    const val = parseFloat(document.getElementById(`s${shape}bend${i}`)?.value || "0");
+    return isNaN(val) ? 0 : val;
+  });
+
+  // Vẽ theo loại shape
+  switch (shape) {
+    case "0": drawShape0(ctx, a); break;
+    case "1": drawShape1(ctx, a, b, bend1); break;
+    case "2": drawShape2(ctx, a, b, c, bend1, bend2); break;
+    case "3": drawShape3(ctx, a, b, c, d, bend1, bend2, bend3); break;
+    case "4": drawShape4(ctx, a, b, c, d, e, bend1, bend2, bend3, bend4); break;
+    case "5": drawShape5(ctx, a, b, c, d, e, f, bend1, bend2, bend3, bend4, bend5); break;
+  }
+
+  // Lưu lại giá trị vào dataset của canvas
+  segments.forEach(seg => {
+    const input = document.getElementById(`s${shape}${seg}`);
+    canvas.dataset[seg] = input ? input.value || "0" : "0";
+  });
+
+  for (let i = 1; i <= 5; i++) {
+    const input = document.getElementById(`s${shape}bend${i}`);
+    canvas.dataset[`bend${i}`] = input ? input.value || "0" : "0";
+  }
+
+  // Gán tên preset nếu có
+  const presetSelect = document.querySelector(`.angle-preset[data-tab="${shape}"]`);
+  if (presetSelect) {
+    canvas.dataset.shapeName = presetSelect.value || "";
+  }
+
+}
+
+function exportTable(skipRedirect = false) {
+  isDirty = false;
+  const rows = document.querySelectorAll("#dataBody tr");
+  const data = [];
+
+  rows.forEach(row => {
+    const canvas = row.querySelector("canvas");
+    if (!canvas) return;
+
+    data.push({
+      shape: canvas.dataset.shape,
+      shapeName: canvas.dataset.shapeName || "",
+      a: canvas.dataset.a || "0",
+      b: canvas.dataset.b || "0",
+      c: canvas.dataset.c || "0",
+      d: canvas.dataset.d || "0",
+      e: canvas.dataset.e || "0",
+      f: canvas.dataset.f || "0",
+      bend1: canvas.dataset.bend1 || "0",
+      bend2: canvas.dataset.bend2 || "0",
+      bend3: canvas.dataset.bend3 || "0",
+      bend4: canvas.dataset.bend4 || "0",
+      bend5: canvas.dataset.bend5 || "0",
+      dia: row.cells[2]?.textContent || "",
+      len: row.cells[3]?.textContent || "",
+      qty: row.cells[4]?.textContent || "",
+    });
+  });
+
+const projectName = document.getElementById("project-name")?.value || "";
+
+const saveData = {
+  projectName,
+  rows: data
+};
+
+localStorage.setItem("rebarRows", JSON.stringify(saveData));
+
+const info = {
+  projectName,
+  siteAddress: document.getElementById("site-address")?.value || "",
+  contact: document.getElementById("contact")?.value || "",
+  deliveryDate: document.getElementById("delivery-date")?.value || "",
+  transport: document.getElementById("transport-select")?.value || ""
+};
+
+savePartialFormInfo(info);
+
+if (!skipRedirect) {
+  window.location.href = "home.html";
+  }
+}
+function importTable() {
+  const json = localStorage.getItem("rebarRows");
+  if (!json) return;
+
+  let saved;
+  try { saved = JSON.parse(json); } catch (err) { localStorage.removeItem("rebarRows"); return; }
+  const rows = saved.rows || [];
+
+  // Gán lại project name
+  if (saved.projectName && document.getElementById("project-name")) {
+    document.getElementById("project-name").value = saved.projectName;
+  }
+
+  rows.forEach(data => {
+    const row = addRow(); // Hàm có sẵn trong hệ thống của bạn
+    const canvas = row.querySelector("canvas");
+
+    // Gán dataset cho canvas
+    Object.entries(data).forEach(([key, val]) => {
+      if (key in canvas.dataset) {
+        canvas.dataset[key] = val;
+      }
+    });
+
+    // Gán giá trị vào các input của popup
+    const shape = data.shape;
+    const segments = ["a", "b", "c", "d", "e", "f"];
+    segments.forEach(seg => {
+      const input = document.getElementById(`s${shape}${seg}`);
+      if (input) input.value = data[seg] || "0";
+    });
+
+    for (let i = 1; i <= 5; i++) {
+      const bendInput = document.getElementById(`s${shape}bend${i}`);
+      if (bendInput) bendInput.value = data[`bend${i}`] || "0";
+    }
+
+    const presetSelect = document.querySelector(`.angle-preset[data-tab="${shape}"]`);
+    if (presetSelect) presetSelect.value = data.shapeName || "";
+
+    row.cells[2].textContent = data.dia || "";
+    row.cells[3].textContent = data.len || "";
+    row.cells[4].textContent = data.qty || "";
+
+    selectedCanvas = canvas;
+    applyShapeToCanvas(canvas);
+  });
+
+  deleteFirstRow();
+  mergeDuplicateRows();
+  if (!document.querySelector("#dataBody tr")) addRow();
+  calculateAll()
+}
+
+function savePartialFormInfo(newData) {
+  const existing = JSON.parse(localStorage.getItem("rebarFormInfo") || "{}");
+  const updated = { ...existing, ...newData };
+  localStorage.setItem("rebarFormInfo", JSON.stringify(updated));
+}
+
+function loadFormInfo() {
+  const json = localStorage.getItem("rebarFormInfo");
+  if (!json) return;
+
+  const info = JSON.parse(json);
+  const setValue = (id, value) => {
+    const el = document.getElementById(id);
+    if (el) el.value = value;
+  };
+
+  setValue("project-name", info.projectName || "");
+  setValue("site-address", info.siteAddress || "");
+  setValue("contact", info.contact || "");
+  setValue("delivery-date", info.deliveryDate || "");
+  setValue("transport-select", info.transport || "");
+  setValue("hannyu", info.hannyu || "");
+}
+window.addEventListener("DOMContentLoaded", loadFormInfo);
+function exportTableToFile() {
+  const rows = document.querySelectorAll("#dataBody tr");
+  const data = [];
+
+  rows.forEach(row => {
+    const canvas = row.querySelector("canvas");
+    if (!canvas) return;
+
+    data.push({
+      shape: canvas.dataset.shape,
+      shapeName: canvas.dataset.shapeName || "",
+      a: canvas.dataset.a || "0",
+      b: canvas.dataset.b || "0",
+      c: canvas.dataset.c || "0",
+      d: canvas.dataset.d || "0",
+      e: canvas.dataset.e || "0",
+      f: canvas.dataset.f || "0",
+      bend1: canvas.dataset.bend1 || "0",
+      bend2: canvas.dataset.bend2 || "0",
+      bend3: canvas.dataset.bend3 || "0",
+      bend4: canvas.dataset.bend4 || "0",
+      bend5: canvas.dataset.bend5 || "0",
+      dia: row.cells[2]?.textContent || "",
+      len: row.cells[3]?.textContent || "",
+      qty: row.cells[4]?.textContent || "",
+    });
+  });
+
+  const projectName = document.getElementById("project-name")?.value.trim() || "project";
+  const today = localISODate(); // YYYY-MM-DD
+
+  const saveData = {
+    projectName,
+    siteAddress: document.getElementById("site-address")?.value || "",
+    contact: document.getElementById("contact")?.value || "",
+    deliveryDate: document.getElementById("delivery-date")?.value || "",
+    transport: document.getElementById("transport-select")?.value || "",
+    hannyu: document.getElementById("hannyu")?.value || "",
+    rows: data
+  };
+
+  const blob = new Blob([JSON.stringify(saveData, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+
+  // Đặt tên file: projectName_YYYY-MM-DD.json
+ const safeProjectName = projectName.replace(/[\/\\:*?"<>|]/g, "_");
+  a.download = `${safeProjectName}_${today}.json`;
+  a.click();
+  isDirty = false;
+
+  URL.revokeObjectURL(url);
+}
+
+function applyfileToCanvas(canvas) {
+  if (!canvas) return;
+
+  const shape = canvas.dataset.shape;
+  const ctx = setupCanvas(canvas);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Đọc chiều dài từ dataset (không dùng input vì có thể chưa được cập nhật)
+  const segments = ["a", "b", "c", "d", "e", "f"];
+  const [a, b, c, d, e, f] = segments.map(seg => {
+    const val = parseFloat(canvas.dataset[seg] || "0");
+    return isNaN(val) ? 0 : val;
+  });
+
+  // Đọc góc từ dataset
+  const [bend1, bend2, bend3, bend4, bend5] = [1, 2, 3, 4, 5].map(i => {
+    const val = parseFloat(canvas.dataset[`bend${i}`] || "0");
+    return isNaN(val) ? 0 : val;
+  });
+
+  // Vẽ theo loại shape
+  switch (shape) {
+    case "0": drawShape0(ctx, a); break;
+    case "1": drawShape1(ctx, a, b, bend1); break;
+    case "2": drawShape2(ctx, a, b, c, bend1, bend2); break;
+    case "3": drawShape3(ctx, a, b, c, d, bend1, bend2, bend3); break;
+    case "4": drawShape4(ctx, a, b, c, d, e, bend1, bend2, bend3, bend4); break;
+    case "5": drawShape5(ctx, a, b, c, d, e, f, bend1, bend2, bend3, bend4, bend5); break;
+  }
+
+  // Cập nhật lại input nếu cần (ngược lại)
+  segments.forEach(seg => {
+    const input = document.getElementById(`s${shape}${seg}`);
+    if (input) input.value = canvas.dataset[seg] || "0";
+  });
+
+  for (let i = 1; i <= 5; i++) {
+    const input = document.getElementById(`s${shape}bend${i}`);
+    if (input) input.value = canvas.dataset[`bend${i}`] || "0";
+  }
+
+  // Gán tên preset nếu có
+  const presetSelect = document.querySelector(`.angle-preset[data-tab="${shape}"]`);
+  if (presetSelect) {
+    presetSelect.value = canvas.dataset.shapeName || "";
+  }
+}
+
+function loadFromFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    const json = e.target.result;
+    let data;
+    try { data = JSON.parse(json); if (!data || typeof data !== "object") throw new Error("bad"); }
+    catch (err) { alert("ファイルを読み込めませんでした（JSON形式が正しくありません）"); input.value = ""; return; }
+    input.value = "";
+    document.querySelectorAll("#dataBody tr").forEach(r => r.remove());
+
+    // Gán thông tin form
+    document.getElementById("project-name").value = data.projectName || "";
+    document.getElementById("site-address").value = data.siteAddress || "";
+    document.getElementById("contact").value = data.contact || "";
+    const hn = document.getElementById("hannyu"); if (hn) hn.value = data.hannyu || "";
+    document.getElementById("delivery-date").value = data.deliveryDate || "";
+    document.getElementById("transport-select").value = data.transport || "";
+
+    // Gán dữ liệu vào bảng
+    (data.rows || []).forEach(d => {
+      const row = addRow(); // hàm đã có sẵn
+      const canvas = row.querySelector("canvas");
+      Object.entries(d).forEach(([key, val]) => {
+        if (key in canvas.dataset) {
+          canvas.dataset[key] = val;
+        }
+      });
+
+      row.cells[2].textContent = d.dia || "";
+      row.cells[3].textContent = d.len || "";
+      row.cells[4].textContent = d.qty || "";
+
+      selectedCanvas = canvas;
+      applyfileToCanvas(canvas);
+	  calculateAll()
+    });
+mergeDuplicateRows();
+  };
+
+  reader.readAsText(file);
+}
+
+function goToToolPage() {
+  exportTable(true); // Lưu dữ liệu nhưng không chuyển trang về index.html
+  window.location.href = "tool.html";
+}
+</script>
+
+<script src="tools.js"></script>
+
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   </div>
